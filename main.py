@@ -1,4 +1,4 @@
-import math
+from math import *
 from decimal import *
 
 def calculate(x):
@@ -80,6 +80,24 @@ def newton(x, depth, ndigits, seeklimit=False, closetolimit=0):
             newton(result, depth - 1, ndigits, seeklimit)
 
 
+def kiintopiste(x, depth, ndigits, seeklimit=False, closetolimit=0):
+
+    result = log(sin(x)) + 2
+
+    if seeklimit and round(result, ndigits) == round(x, ndigits):
+        print(round(result, ndigits))
+        closetolimit += 1
+
+        if depth > 0 and closetolimit < 10:
+            kiintopiste(result, depth - 1, ndigits, seeklimit, closetolimit)
+
+    else:
+        print(result)
+        if depth > 0:
+            kiintopiste(result, depth - 1, ndigits, seeklimit)
+
+
 # iterate(3, 4, 100, ndigits=2, seeklimit=True)
 # an2xan1(2, 2/3, depth=50, ndigits=6)
-newton(x=1, depth=50, ndigits=3, seeklimit=True)
+# newton(x=1, depth=50, ndigits=3, seeklimit=True)
+kiintopiste(1.9, depth=70, ndigits=4, seeklimit=True)
